@@ -1,3 +1,7 @@
+# Forked For
+Updated to VS2019 and fixed an issue that was causing repition of function parameters in the creation of the proxy templates.
+
+
 # DLL_Wrapper
 
 A program that generates code to implement a DLL Proxy.

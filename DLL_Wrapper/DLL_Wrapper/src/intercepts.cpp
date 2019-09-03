@@ -29,12 +29,7 @@ Configuration::Intercepts::~Intercepts()
 // TODO Error checking
 bool Configuration::Intercepts::load(const tinyxml2::XMLNode *intercepts_root)
 {
-	const tinyxml2::XMLElement				*element;
-	const tinyxml2::XMLElement				*paramaters;
-	const tinyxml2::XMLElement				*child;
-
-	Configuration::InterceptFunction		intercept;
-	Configuration::InterceptFunction::Param	param;
+	const tinyxml2::XMLElement				*element;	
 
 	if (intercepts_root == NULL)
 		return false;
@@ -42,6 +37,10 @@ bool Configuration::Intercepts::load(const tinyxml2::XMLNode *intercepts_root)
 	element = _root->FirstChildElement("function");
 	while (element != NULL)
 	{
+		const tinyxml2::XMLElement* paramaters;
+		const tinyxml2::XMLElement* child;
+		Configuration::InterceptFunction		intercept;
+
 		if (!_verifyElement(element->FirstChildElement("name"), intercept._name, "name"))
 			return false;
 		if (!_verifyElement(element->FirstChildElement("return_type"), intercept._return_type, "return_type"))
@@ -58,6 +57,7 @@ bool Configuration::Intercepts::load(const tinyxml2::XMLNode *intercepts_root)
 			paramaters = child->FirstChildElement("param");
 			while (paramaters != NULL)
 			{
+				Configuration::InterceptFunction::Param	param;
 				param.type = std::string(paramaters->Attribute("type"));
 				param.name = std::string(paramaters->GetText());
 
